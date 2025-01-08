@@ -29,7 +29,7 @@ The Passport Data Extractor is a Python-based application designed to extract al
 ### Installation  
 1. Clone the repository:  
    ```bash  
-   git clone [https://github.com/your-username/passport-data-extractor.git](https://github.com/SahanWeerasiri/Passport-Data-Extractor.git)  
+   git clone https://github.com/SahanWeerasiri/Passport-Data-Extractor.git
    ```  
 2. Navigate to the project directory:  
    ```bash  
