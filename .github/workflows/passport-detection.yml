@@ -1,0 +1,39 @@
+name: Passport Detection
+on:
+  workflow_dispatch:
+    inputs:
+      image_url:
+        description: 'URL of the image'
+        required: true
+
+jobs:
+  process_image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tesseract-ocr
+        sudo apt-get install -y libopencv-dev python3-opencv
+        python -m pip install --upgrade pip
+        pip install opencv-python-headless pytesseract requests
+
+    - name: Run passport detection
+      env:
+        IMAGE_URL: ${{ github.event.inputs.image_url }}
+      run: |
+        python passport_detection.py
+
+    - name: Upload results
+      uses: actions/upload-artifact@v3
+      with:
+        name: passport_detection_result
+        path: passport_detection_result.json
